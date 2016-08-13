@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <title>Test Page</title>
+
+<style>
+body {
+  padding-top: 50px;
+}
+
+.main-container {
+  padding: 40px 15px;
+}
+
+.p {
+  text-align: center;
+}
+</style>
+
+ <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+
+
+<div class="row main-container">
+    <div class="col-md-9">
+     <h3>Test working</h3>
+    </div>
+</div>
+
+
+
+<script>
+/* Demo Scripts for Making Twitter Bootstrap 3 Tab Play Nicely With The Masonry Library
+* on SitePoint by Maria Antonietta Perna
+*/
+
+//Initialize Masonry inside Bootstrap 3 Tab component 
+
+(function( $ ) {
+
+	var $container = $('.masonry-container');
+	$container.imagesLoaded( function () {
+		$container.masonry({
+			columnWidth: '.item',
+			itemSelector: '.item'
+		});
+	});
+	
+	//Reinitialize masonry inside each panel after the relative tab link is clicked - 
+	$('a[data-toggle=tab]').each(function () {
+		var $this = $(this);
+
+		$this.on('shown.bs.tab', function () {
+		
+			$container.imagesLoaded( function () {
+				$container.masonry({
+					columnWidth: '.item',
+					itemSelector: '.item'
+				});
+			});
+
+		}); //end shown
+	});  //end each
+	
+})(jQuery);
+</script>
+
+</body>
+</html>
