@@ -1,0 +1,57 @@
+	<ul class="list-group">
+		<?php
+		
+		if($data['venues'] && is_array($data['venues'])):
+			$affiliate_url='';
+		if( !empty( $affiliate_id ) ) {
+			$affiliate_url = '?aid='.$affiliate_id;
+			$track_url     = '&fb_track=1';
+		}	
+		else{
+			$track_url     = '?fb_track=1';
+		}
+		foreach ($data['venues'] as $key => $venue) {
+			?>
+			<li class="list-group-item">
+				<div  class="row">
+					<div class="col-lg-3">
+						<?php echo date( 'M d' , strtotime($venue['datetime_local'] )); ?>
+					</div>
+					<div class="col-lg-6">
+						<?php
+						$venue_name=strtolower($venue['title']);
+						$title_url = 'http://seatgeek.com/'.$venue_name.'-tickets/'.$affiliate_url;					
+						echo '<h4><a href="'. $title_url .'" target="_blank">'. $venue['title'] .'</a></h4>'; 
+						?>
+						
+						<span><?php
+							$address = $venue['venue']['extended_address'];
+							$zip_code = substr($address, -5);
+							if (is_numeric($zip_code))
+								$address = substr($address, 0, strlen($address) - 5);	
+							echo $venue['venue']['name'] . ', ' .  $address; ?></span>
+						</div>
+						<div class="col-lg-3">
+							<?php 
+							$url=$venue['url'].$affiliate_url;
+							if( $venue['stats']['lowest_price']>0){
+								$buttontitle="From $".$venue['stats']['lowest_price'];
+							}else{
+								$buttontitle="Find Tickets";
+							}
+							?>
+							<a class="btn btn-success" target="_blank" href="<?php echo $url; ?>" ><?php  echo $buttontitle;?></a>
+							
+							
+						</div>
+					</div>
+				</li>
+
+				<?php }
+				else: ?>
+				<li class="list-group-item">
+					No Record Found
+				</li>
+			<?php endif; ?>
+
+		</ul>

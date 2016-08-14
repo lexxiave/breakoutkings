@@ -1,0 +1,114 @@
+
+(function (global) {
+  var widgetTagElements=[];
+  var apiurl="<?php echo $data['base'] ?>/api/";
+  // add array index of for old browsers (IE<9)
+  if (!Array.prototype.indexOf) {
+    Array.prototype.indexOf = function(obj, start) {
+      var i, j;
+      i = start || 0;
+      j = this.length;
+      while (i < j) {
+        if (this[i] === obj) {
+          return i;
+        }
+        i++;
+      }
+      return -1;
+    };
+  }
+  var ajax = {};
+  ajax.x = function () {
+    if (typeof XMLHttpRequest !== 'undefined') {
+      return new XMLHttpRequest();
+    }
+    var versions = [
+    "MSXML2.XmlHttp.6.0",
+    "MSXML2.XmlHttp.5.0",
+    "MSXML2.XmlHttp.4.0",
+    "MSXML2.XmlHttp.3.0",
+    "MSXML2.XmlHttp.2.0",
+    "Microsoft.XmlHttp"
+    ];
+
+    var xhr;
+    for (var i = 0; i < versions.length; i++) {
+      try {
+        xhr = new ActiveXObject(versions[i]);
+        break;
+      } catch (e) {
+      }
+    }
+    return xhr;
+  };
+
+  ajax.send = function (url, callback, method, initiator, async) {
+    if (async === undefined) {
+      async = true;
+    }
+    
+    var x = ajax.x();
+    x.open(method, url, async);
+    x.onreadystatechange = function () {
+      if (x.readyState == 4) {
+        callback(x.responseText,initiator)
+      }
+    };
+    if (method == 'POST') {
+      x.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    }
+    x.send()
+  };
+
+  ajax.get = function (url, data, callback, async) {
+    var initiator=data['initiator'];
+    var query = [];
+    for (var key in data) {
+      query.push(encodeURIComponent(key) + '=' + encodeURIComponent(data[key]));
+    }
+    ajax.send(url + (query.length ? '?' + query.join('&') : ''), callback, 'GET', initiator, async)
+  };
+
+
+
+  // make a global object to store stuff in
+  if(!global.OpenDataCommunities) { global.OpenDataCommunities = {}; };
+  var OpenDataCommunities = global.OpenDataCommunities;
+
+  // To keep track of which embeds we have already processed
+  if(!OpenDataCommunities.processedScripts) { OpenDataCommunities.processedScripts = []; };
+  var processedScripts = OpenDataCommunities.processedScripts;
+
+  if(!OpenDataCommunities.styleTags) { OpenDataCommunities.styleTags = []; };
+  var styleTags = OpenDataCommunities.styleTags;
+
+  var widgetTags = document.getElementsByClassName('seatgeek-widget');
+  for(var i = 0; i < widgetTags.length; i++) {
+   var  widgetTag = widgetTags[i];
+    var type=widgetTag.getAttribute("data-type");
+    var term=widgetTag.getAttribute("data-term");
+    var count=widgetTag.getAttribute("data-count");
+    // src matches the url of this request, and not processed it yet.
+    if(type){
+      ajax.get(apiurl+type, {'term':term,'count':count,'initiator':widgetTag}, function(response,initiator) {
+        var div = document.createElement('div');
+        div.innerHTML = response;
+        initiator.appendChild(div);
+      });  
+    }
+
+    processedScripts.push(widgetTagElements['element'+i]);
+
+      // Create a div
+      // var div = document.createElement('div');
+      // div.id = 'seatgeek';
+
+      // // add the cleanslate classs for extreme-CSS reset.
+      // div.className = 'seatgeek-container';
+
+
+      // div.innerHTML = '<h2>Hello World</h2>';
+      // widgetTag.appendChild(div);
+
+    }
+  })(this);
