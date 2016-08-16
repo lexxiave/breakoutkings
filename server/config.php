@@ -1,5 +1,5 @@
 <?php
 
 
-define("BASEURL","http://atlnightclubz.com/jwidget/server/");
+define("BASEURL","http://atlnightclubz.com/breakoutkings/server/getscript");
 define("AFFILIATEID","11191");
