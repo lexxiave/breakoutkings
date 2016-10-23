@@ -1,5 +1,5 @@
 <?php
 
 
-define("BASEURL","http://atlnightclubz.com/breakoutkings/server/");
+define("BASEURL","http://breakoutkings.netlify.com/server/");
 define("AFFILIATEID","11191");
