@@ -2,4 +2,4 @@
 
 
 define("BASEURL","http://breakoutkings.netlify.com/server/");
-define("AFFILIATEID","11191");
+define("AFFILIATEID","109856");
