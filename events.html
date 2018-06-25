@@ -1,62 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>jWidget</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-<!-- Include This script on your page -->
-	<script type="text/javascript" id="jWidget-embedder" class="dclg-impact-indicators-async-script-loader">
-		(function() {
-			function async_load(){
-				var s = document.createElement('script');
-				s.type = 'text/javascript';
-				s.async = true;
-				var theUrl = 'http://atlnightclubz.com/breakoutkings/server/getscript';
-				s.src = theUrl + ( theUrl.indexOf("?") >= 0 ? "&" : "?") + 'ref=' + encodeURIComponent(window.location.href);
-				var embedder = document.getElementById('jWidget-embedder');
-				embedder.parentNode.insertBefore(s, embedder);
-			}
-			if (window.attachEvent)
-				window.attachEvent('onload', async_load);
-			else
-				window.addEventListener('load', async_load, false);
-		})();
-	</script>
+	<title> Event </title>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	
 </head>
 <body>
 
+
+<div class="container">
+
+<div class="col-sm-9">
+
+        <img src="../img/placeholder.jpg" alt="" class="img-responsive">
 	
-
-<div class="row">
-  
-  <div class="col-sm-8">
-
-    <div class="embed-responsive embed-responsive-16by9">
-      <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/lw3Or6eqIpI" frameborder="0" allowfullscreen></iframe>
-    </div> 
-
-    <h3 style="text-align:center"> Saturday, October 22, 2016 | 8:00 PM </h3>
+	<div class="seatgeek-widget" data-type="artist" data-term="Music Festival" data-count="150"></div>
 
 
-    <h3 style="text-align:center">
-      An Intimate Night With Allen Stone: My Favorite Songs, Favorite Stories with Opener Moorea Masa at City Winery Atlanta
-     </h3>
+</div> <!-- .col-sm-9  -->
+	
+	<div class="col-sm-3">
+			<div data-include="../sidebar.html"></div>
+	</div><!--.col-sm-3 -->
 
-      <div class="panel panel-default">
-		<!-- Default panel contents -->
-		<div class="panel-heading"><strong>FIND TICKETS</strong></div>
-		<div class="panel-body">
-			<div class="seatgeek-widget" data-type="event" data-term="Drake Philips Arena" data-count="2"></div>
-		</div>
-	</div>
+</div> <!--.container --> 
+	
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>	
 
-     <br clear="all" /> 
+<script src = "http://breakoutkings.netlify.com/jwidget-embedder.js" id="jWidget-embedder" class="dclg-impact-indicators-async-script-loader"></script>
 
- </div>
-
-    <div class="col-sm-4">.col-sm-4 </div>
-   
-  
-</div>
 
 </body>
 </html>
